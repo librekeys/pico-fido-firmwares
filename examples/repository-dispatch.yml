@@ -1,0 +1,20 @@
+name: repository-dispatch
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - v**
+
+jobs:
+  repository-dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v4.0.1
+        with:
+          # You can also use a fine-grained personal access token (beta). It needs the following permissions on the target repositories:
+          # contents: read & write
+          # metadata: read only (automatically selected when selecting the contents permission)
+          token: ${{ secrets.PAT }}
+          repository: librekeys/pico-fido-firmwares
+          event-type: update-flake-packages

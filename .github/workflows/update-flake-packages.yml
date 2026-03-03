@@ -1,6 +1,8 @@
 name: update-flake-packages
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types: [update-flake-packages]
   schedule:
     - cron: '0 4 * * 0'
 
