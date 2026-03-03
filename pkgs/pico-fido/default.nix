@@ -24,13 +24,13 @@ assert lib.assertMsg (!(vidpid != "" && (usbVID != "" || usbPID != ""))) "pico-f
 stdenvNoCC.mkDerivation (finalAttrs: {
 
   pname = "pico-fido";
-  version = "7.4.1-librekeys";
+  version = "7.4.2-librekeys";
 
   src = fetchFromGitHub {
     owner = "librekeys";
     repo = "pico-fido";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-2Q1qgWGYXSVZ8VJNqwwgnRIUnryqQi2MQr0zqmNRa+k=";
+    hash = "sha256-ztAW51Zjx37rFlPJqkRfMH/Gv/aV7TvbXJSEPslENek=";
     fetchSubmodules = true;
   };
 
