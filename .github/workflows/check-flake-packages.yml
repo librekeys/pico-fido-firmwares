@@ -1,0 +1,26 @@
+name: check-flake-packages
+on:
+  pull_request:
+    paths-ignore:
+      - '.github/**'
+      - 'maintainers/**'
+      - '.gitignore'
+      - '**/README.md'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v6
+    - name: Install nix
+      uses: cachix/install-nix-action@v31
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+        extra_nix_config: |
+          experimental-features = nix-command flakes
+          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+    - name: Check evaluation
+      run: nix flake check
+    - name: Build nix packages
+      run: nix build --no-link --print-build-logs .#pico-fido
